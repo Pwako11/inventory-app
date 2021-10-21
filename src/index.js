@@ -24,12 +24,31 @@ load(apiUrl, callBack)
 
 function addInvetory(data) {
     console.log(data)
+
+    const {page, per_page, total, total_pages } = data 
+
     for (const prop in data) {
-      var list = document.createElement('li');
-      list.innerText = `data.${prop}: ${data[prop]}`
       
-      document.body.appendChild(list);
-      document.body.appendChild(document.createElement('br'));
+        console.log (data.length)
+        var list = document.createElement('li');
+        var inventoryDetails = document.createElement('p');
+      
+      if ( typeof data[prop] === "number"){
+        list.innerText = `${prop}: ${data[prop]}`
+        document.body.appendChild(list);
+        document.body.appendChild(document.createElement('br'));
+      }else{
+          inventoryDetails.innerText = "Inventory Details"
+          document.body.appendChild(inventoryDetails)
+          let detailedData = data.data[0]
+          console.log(detailedData)
+          for (const lists in detailedData){
+            var propDetails = document.createElement('li');
+            propDetails.innerText = `${lists}: ${detailedData[lists]}`
+            document.body.appendChild(propDetails);
+            document.body.appendChild(document.createElement('br'));
+            }
+        }
     }
   }
   
